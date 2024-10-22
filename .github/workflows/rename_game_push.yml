@@ -82,6 +82,12 @@ jobs:
           chmod +x scripts/rename_game.sh
           ./scripts/rename_game.sh "$PHRASE1" "$PHRASE2" "$REPLACEMENT_PHRASE"
 
+      # Check Git Status
+      - name: Check Git Status
+        run: |
+          echo "Current Git Status:"
+          git status
+      
       # Convert the inputs to lowercase
       - name: Convert Arguments to Lowercase
         run: |
