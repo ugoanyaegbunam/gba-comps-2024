@@ -27,7 +27,7 @@ jobs:
       - name: Define Branch-Specific Arguments
         run: |
           if [ "${{ github.ref_name }}" == "main" ]; then
-            echo "PHRASE_PATTERN='CarletonSpades[ABCD]'" >> $GITHUB_ENV
+            echo "PHRASE_PATTERN='CarletonSpades[ABCE]'" >> $GITHUB_ENV
             echo "REPLACEMENT_PHRASE='CarletonSpades'" >> $GITHUB_ENV
           elif [ "${{ github.ref_name }}" == "leo" ]; then
             echo "PHRASE_PATTERN='CarletonSpadesA'" >> $GITHUB_ENV
@@ -39,7 +39,7 @@ jobs:
             echo "PHRASE_PATTERN='CarletonSpadesC'" >> $GITHUB_ENV
             echo "REPLACEMENT_PHRASE='CarletonSpades'" >> $GITHUB_ENV
           elif [ "${{ github.ref_name }}" == "ugo" ]; then
-            echo "PHRASE_PATTERN='CarletonSpadesD'" >> $GITHUB_ENV
+            echo "PHRASE_PATTERN='CarletonSpadesE'" >> $GITHUB_ENV
             echo "REPLACEMENT_PHRASE='CarletonSpades'" >> $GITHUB_ENV
           fi
 
