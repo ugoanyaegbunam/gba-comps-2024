@@ -29,6 +29,12 @@ jobs:
           if [ "${{ github.ref_name }}" == "main" ]; then
             echo "PHRASE_PATTERN='CarletonSpades[ABCE]'" >> $GITHUB_ENV
             echo "REPLACEMENT_PHRASE='CarletonSpades'" >> $GITHUB_ENV
+          elif [ "${{ github.ref_name }}" == "backend" ]; then
+            echo "PHRASE_PATTERN='CarletonSpades[ABCE]'" >> $GITHUB_ENV
+            echo "REPLACEMENT_PHRASE='CarletonSpades'" >> $GITHUB_ENV
+          elif [ "${{ github.ref_name }}" == "frontend" ]; then
+            echo "PHRASE_PATTERN='CarletonSpades[ABCE]'" >> $GITHUB_ENV
+            echo "REPLACEMENT_PHRASE='CarletonSpades'" >> $GITHUB_ENV
           elif [ "${{ github.ref_name }}" == "leo" ]; then
             echo "PHRASE_PATTERN='CarletonSpadesA'" >> $GITHUB_ENV
             echo "REPLACEMENT_PHRASE='CarletonSpades'" >> $GITHUB_ENV
