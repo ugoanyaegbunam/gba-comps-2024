@@ -41,26 +41,26 @@ jobs:
           echo "Branch being processed: ${GITHUB_REF_NAME}"
 
           if [ "${{ github.ref_name }}" == "main" ]; then
-            echo "PHRASE_PATTERN='CarletonSpades[ABCE]'" >> $GITHUB_ENV
-            echo "REPLACEMENT_PHRASE='CarletonSpades'" >> $GITHUB_ENV
+            echo "PHRASE_PATTERN='CompsSpades[EBCD]'" >> $GITHUB_ENV
+            echo "REPLACEMENT_PHRASE='CompsSpades'" >> $GITHUB_ENV
           elif [ "${{ github.ref_name }}" == "backend" ]; then
-            echo "PHRASE_PATTERN='CarletonSpades[ABCE]'" >> $GITHUB_ENV
-            echo "REPLACEMENT_PHRASE='CarletonSpades'" >> $GITHUB_ENV
+            echo "PHRASE_PATTERN='CompsSpades[EBCD]'" >> $GITHUB_ENV
+            echo "REPLACEMENT_PHRASE='CompsSpades'" >> $GITHUB_ENV
           elif [ "${{ github.ref_name }}" == "frontend" ]; then
-            echo "PHRASE_PATTERN='CarletonSpades[ABCE]'" >> $GITHUB_ENV
-            echo "REPLACEMENT_PHRASE='CarletonSpades'" >> $GITHUB_ENV
+            echo "PHRASE_PATTERN='CompsSpades[EBCD]'" >> $GITHUB_ENV
+            echo "REPLACEMENT_PHRASE='CompsSpades'" >> $GITHUB_ENV
           elif [ "${{ github.ref_name }}" == "leo" ]; then
-            echo "PHRASE_PATTERN='CarletonSpadesA'" >> $GITHUB_ENV
-            echo "REPLACEMENT_PHRASE='CarletonSpades'" >> $GITHUB_ENV
+            echo "PHRASE_PATTERN='CompsSpadesA'" >> $GITHUB_ENV
+            echo "REPLACEMENT_PHRASE='CompsSpades'" >> $GITHUB_ENV
           elif [ "${{ github.ref_name }}" == "ethan" ]; then
-            echo "PHRASE_PATTERN='CarletonSpadesB'" >> $GITHUB_ENV
-            echo "REPLACEMENT_PHRASE='CarletonSpades'" >> $GITHUB_ENV
-          elif [ "${{ github.ref_name }}" == "jon" ]; then
-            echo "PHRASE_PATTERN='CarletonSpadesC'" >> $GITHUB_ENV
-            echo "REPLACEMENT_PHRASE='CarletonSpades'" >> $GITHUB_ENV
+            echo "PHRASE_PATTERN='CompsSpadesB'" >> $GITHUB_ENV
+            echo "REPLACEMENT_PHRASE='CompsSpades'" >> $GITHUB_ENV
+          elif [ "${{ github.ref_name }}" == "jonathan" ]; then
+            echo "PHRASE_PATTERN='CompsSpadesC'" >> $GITHUB_ENV
+            echo "REPLACEMENT_PHRASE='CompsSpades'" >> $GITHUB_ENV
           elif [ "${{ github.ref_name }}" == "ugo" ]; then
-            echo "PHRASE_PATTERN='CarletonSpadesE'" >> $GITHUB_ENV
-            echo "REPLACEMENT_PHRASE='CarletonSpades'" >> $GITHUB_ENV
+            echo "PHRASE_PATTERN='CompsSpadesE'" >> $GITHUB_ENV
+            echo "REPLACEMENT_PHRASE='CompsSpades'" >> $GITHUB_ENV
           fi
 
           # Print the set variables for debugging
