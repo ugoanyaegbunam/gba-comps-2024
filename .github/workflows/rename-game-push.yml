@@ -1,0 +1,74 @@
+name: Replace Phrases on Push
+
+on:
+  push:
+    branches:
+      - "*"  # Run on all branches
+
+jobs:
+  replace_phrases:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Set up Git with Secrets
+        run: |
+          git config --global user.name "${{ secrets.GH_USERNAME }}"  # Your GitHub username stored as a secret
+          git config --global user.email "${{ secrets.GH_EMAIL }}"    # Your GitHub email stored as a secret
+          git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/${{ github.repository }}.git
+
+
+      # Set phrase pattern based on the target branch
+      - name: Define Branch-Specific Arguments
+        run: |
+          if [ "${{ github.ref_name }}" == "main" ]; then
+            echo "PHRASE_PATTERN='CarletonSpades[ABCD]'" >> $GITHUB_ENV
+            echo "REPLACEMENT_PHRASE='CarletonSpades'" >> $GITHUB_ENV
+          elif [ "${{ github.ref_name }}" == "leo" ]; then
+            echo "PHRASE_PATTERN='CarletonSpadesA'" >> $GITHUB_ENV
+            echo "REPLACEMENT_PHRASE='CarletonSpades'" >> $GITHUB_ENV
+          elif [ "${{ github.ref_name }}" == "ethan" ]; then
+            echo "PHRASE_PATTERN='CarletonSpadesB'" >> $GITHUB_ENV
+            echo "REPLACEMENT_PHRASE='CarletonSpades'" >> $GITHUB_ENV
+          elif [ "${{ github.ref_name }}" == "jon" ]; then
+            echo "PHRASE_PATTERN='CarletonSpadesC'" >> $GITHUB_ENV
+            echo "REPLACEMENT_PHRASE='CarletonSpades'" >> $GITHUB_ENV
+          elif [ "${{ github.ref_name }}" == "ugo" ]; then
+            echo "PHRASE_PATTERN='CarletonSpadesD'" >> $GITHUB_ENV
+            echo "REPLACEMENT_PHRASE='CarletonSpades'" >> $GITHUB_ENV
+          fi
+
+      # Run the rename_game.sh script with the original arguments
+      - name: Run Rename Script with Original Arguments
+        run: |
+          chmod +x scripts/rename_game.sh
+          ./scripts/rename_game.sh "$PHRASE_PATTERN" "$REPLACEMENT_PHRASE"
+
+      # Convert the inputs to lowercase
+      - name: Convert Arguments to Lowercase
+        run: |
+          LOWERCASE_PHRASE_PATTERN=$(echo "$PHRASE_PATTERN" | tr '[:upper:]' '[:lower:]')
+          LOWERCASE_REPLACEMENT_PHRASE=$(echo "$REPLACEMENT_PHRASE" | tr '[:upper:]' '[:lower:]')
+          echo "LOWERCASE_PHRASE_PATTERN=$LOWERCASE_PHRASE_PATTERN" >> $GITHUB_ENV
+          echo "LOWERCASE_REPLACEMENT_PHRASE=$LOWERCASE_REPLACEMENT_PHRASE" >> $GITHUB_ENV
+
+      # Run the rename_game.sh script with the lowercase arguments
+      - name: Run Rename Script with Lowercase Arguments
+        run: |
+          ./scripts/rename_game.sh "$LOWERCASE_PHRASE_PATTERN" "$LOWERCASE_REPLACEMENT_PHRASE"
+
+      # Commit and push changes back to the branch
+      - name: Commit and push changes back to the branch
+        run: |
+          if [[ `git status --porcelain` ]]; then
+            git add .
+            git commit -m "Automated replacement of $PHRASE_PATTERN with $REPLACEMENT_PHRASE and lowercase versions"
+            git push origin ${{ github.head_ref }}  # Push to the original branch
+          else
+            echo "No changes to commit"
+          fi
