@@ -9,6 +9,7 @@ REPLACEMENT_PHRASE="$2"
 # -r flag for recursive, -i for in-place editing, -E for extended regex support
 find . -type f \
   -not -path "./.git/*" \
+  -not -path "./.github/*" \
   -not -path "./scripts/*" \
   -not -path "./hooks/*" \
   -exec sed -i -E "s/${PHRASE_PATTERN}/${REPLACEMENT_PHRASE}/g" {} +
