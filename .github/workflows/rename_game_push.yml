@@ -10,6 +10,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Enable detailed logging in the workflow for GitHub Actions
+      - name: Enable Step Debugging
+        run: |
+          echo "Enabling GitHub Actions Step Debugging"
+          echo "ACTIONS_STEP_DEBUG=true" >> $GITHUB_ENV
+
+      # Enable script debugging mode (prints each command before execution)
+      - name: Enable Debugging in Script
+        run: |
+          set -x  # Enable shell debug mode
+
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
@@ -18,14 +29,17 @@ jobs:
 
       - name: Set up Git with Secrets
         run: |
+          echo "Configuring Git with secrets..."
           git config --global user.name "${{ secrets.GH_USERNAME }}"  # Your GitHub username stored as a secret
           git config --global user.email "${{ secrets.GH_EMAIL }}"    # Your GitHub email stored as a secret
           git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/${{ github.repository }}.git
 
-
       # Set phrase pattern based on the target branch
       - name: Define Branch-Specific Arguments
         run: |
+          echo "Determining branch-specific pattern..."
+          echo "Branch being processed: ${GITHUB_REF_NAME}"
+
           if [ "${{ github.ref_name }}" == "main" ]; then
             echo "PHRASE_PATTERN='CarletonSpades[ABCE]'" >> $GITHUB_ENV
             echo "REPLACEMENT_PHRASE='CarletonSpades'" >> $GITHUB_ENV
@@ -49,9 +63,14 @@ jobs:
             echo "REPLACEMENT_PHRASE='CarletonSpades'" >> $GITHUB_ENV
           fi
 
+          # Print the set variables for debugging
+          echo "PHRASE_PATTERN: $PHRASE_PATTERN"
+          echo "REPLACEMENT_PHRASE: $REPLACEMENT_PHRASE"
+
       # Run the rename_game.sh script with the original arguments
       - name: Run Rename Script with Original Arguments
         run: |
+          echo "Running rename_game.sh script with original arguments..."
           chmod +x scripts/rename_game.sh
           ./scripts/rename_game.sh "$PHRASE_PATTERN" "$REPLACEMENT_PHRASE"
 
@@ -63,18 +82,29 @@ jobs:
           echo "LOWERCASE_PHRASE_PATTERN=$LOWERCASE_PHRASE_PATTERN" >> $GITHUB_ENV
           echo "LOWERCASE_REPLACEMENT_PHRASE=$LOWERCASE_REPLACEMENT_PHRASE" >> $GITHUB_ENV
 
+          # Print lowercase values for debugging
+          echo "LOWERCASE_PHRASE_PATTERN: $LOWERCASE_PHRASE_PATTERN"
+          echo "LOWERCASE_REPLACEMENT_PHRASE: $LOWERCASE_REPLACEMENT_PHRASE"
+
       # Run the rename_game.sh script with the lowercase arguments
       - name: Run Rename Script with Lowercase Arguments
         run: |
+          echo "Running rename_game.sh script with lowercase arguments..."
           ./scripts/rename_game.sh "$LOWERCASE_PHRASE_PATTERN" "$LOWERCASE_REPLACEMENT_PHRASE"
 
       # Commit and push changes back to the branch
       - name: Commit and push changes back to the branch
         run: |
           if [[ `git status --porcelain` ]]; then
+            echo "Changes detected, committing and pushing..."
             git add .
             git commit -m "Automated replacement of $PHRASE_PATTERN with $REPLACEMENT_PHRASE and lowercase versions"
             git push origin ${{ github.head_ref }}  # Push to the original branch
           else
             echo "No changes to commit"
           fi
+
+      # Check for errors after running commands (trap)
+      - name: Add error trapping
+        run: |
+          trap 'echo "An error occurred on line $LINENO"; exit 1' ERR
