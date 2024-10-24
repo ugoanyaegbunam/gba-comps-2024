@@ -1,3 +1,5 @@
 compsspadesd
 CompsSpadesD
 compsspadesc
+compsspades
+CompsSpades
