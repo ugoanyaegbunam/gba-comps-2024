@@ -8,14 +8,14 @@ echo "Running post-merge hook for branch: $current_branch"
 # Conditional logic based on the branch
 if [ "$current_branch" == "ethan" ]; then
   echo "On ethan branch, running ethan-specific game rename..."
-  ./scripts/rename_game.sh 'CompsSpades' 'CompsSpadesB'
+  ./scripts/rename_game.sh 'CompsSpadesD' 'CompsSpadesB'
 elif [ "$current_branch" == "leo" ]; then
   echo "On leo branch, running leo-specific game rename..."
-  ./scripts/rename_game.sh 'CompsSpades' 'CompsSpadesE'
+  ./scripts/rename_game.sh 'CompsSpadesD' 'CompsSpadesE'
 elif [ "$current_branch" == "jon" ]; then
   echo "On jon branch, running jon-specific game rename..."
-  ./scripts/rename_game.sh 'CompsSpades' 'CompsSpades'
+  ./scripts/rename_game.sh 'CompsSpadesD' 'CompsSpadesC'
 elif [ "$current_branch" == "ugo" ]; then
   echo "On ugo branch, running ugo-specific game rename..."
-  ./scripts/rename_game.sh 'CompsSpades' 'CompsSpadesD'
+  ./scripts/rename_game.sh 'CompsSpadesD' 'CompsSpadesD'
 fi
