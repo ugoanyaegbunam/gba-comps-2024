@@ -19,3 +19,4 @@ elif [ "$current_branch" == "ugo" ]; then
   echo "On ugo branch, running ugo-specific game rename..."
   ./scripts/rename_game.sh 'CompsSpades' 'CompsSpades' 'CompsSpadesD'
 fi
+
