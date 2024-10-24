@@ -1,39 +1,42 @@
 #!/bin/bash
 
 # Get the phrases to replace from the arguments
-PHRASE1="$1"
-PHRASE2="$2"
-REPLACEMENT_PHRASE="$3"
+PHRASE_A="$1"
+PHRASE_B="$2"
+PHRASE_C="$3"
+
+# Define the parent directory
+TARGET_DIR=".."
 
 # Print the received arguments for debugging
-echo "Replacing '$PHRASE1' and '$PHRASE2' with '$REPLACEMENT_PHRASE'"
+echo "Replacing all instances of '$PHRASE_A' and '$PHRASE_B' with '$PHRASE_C' in the parent directory"
 
-# Replace the patterns in all files in the repository,
-# excluding the .git, .github, scripts, and hooks directories.
-# -r flag for recursive, -i for in-place editing, -E for extended regex support
-find . -type f \
-  -not -path "./.git/*" \
-  -not -path "./.github/*" \
-  -not -path "./scripts/*" \
-  -not -path "./hooks/*" \
-  -exec sed -i -E "s/($PHRASE1|$PHRASE2)/$REPLACEMENT_PHRASE/g" {} + \
-  -exec sh -c 'echo "Replaced in file: {}"' \;
+# Replace in file contents in the parent directory
+find "$TARGET_DIR" -type f \
+  -not -path "$TARGET_DIR/.git/*" \
+  -not -path "$TARGET_DIR/.github/*" \
+  -not -path "$TARGET_DIR/scripts/*" \
+  -not -path "$TARGET_DIR/hooks/*" \
+  -exec sh -c '
+    file="$1"
+    echo "Processing file contents: $file"
+    sed -i -E "s/${2}|${3}/${4}/g" "$file"
+  ' sh {} "$PHRASE_A" "$PHRASE_B" "$PHRASE_C" \;
 
-# Rename files that have the pattern in their filename,
-# excluding the .git, .github, scripts, and hooks directories.
-for file in $(find . -type f \
-  -name "*$PHRASE1*" \
-  -not -path "./.git/*" \
-  -not -path "./.github/*" \
-  -not -path "./scripts/*" \
-  -not -path "./hooks/*"); do
-  newfile=$(echo "$file" | sed -E "s/($PHRASE1|$PHRASE2)/$REPLACEMENT_PHRASE/g")
-  
+# Rename files and directories in the parent directory
+find "$TARGET_DIR" -depth -type f \
+  -not -path "$TARGET_DIR/.git/*" \
+  -not -path "$TARGET_DIR/.github/*" \
+  -not -path "$TARGET_DIR/scripts/*" \
+  -not -path "$TARGET_DIR/hooks/*" | while IFS= read -r file; do
+  newfile=$(echo "$file" | sed -E "s/${PHRASE_A}|${PHRASE_B}/${PHRASE_C}/g")
+
   # Only rename if the new filename is different
   if [ "$file" != "$newfile" ]; then
     mv "$file" "$newfile"
     echo "Renamed file: '$file' to '$newfile'"
   fi
-done 
+done
 
-echo "Replaced all instances of '$PHRASE1' and '$PHRASE2' with '$REPLACEMENT_PHRASE' in file contents and filenames, ignoring specified directories."
+# Final message
+echo "Replaced all instances of '$PHRASE_A' and '$PHRASE_B' with '$PHRASE_C' in both file contents and filenames in the parent directory."
