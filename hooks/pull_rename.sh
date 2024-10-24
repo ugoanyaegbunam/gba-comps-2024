@@ -14,8 +14,8 @@ elif [ "$current_branch" == "leo" ]; then
   ./scripts/rename_game.sh 'CompsSpades' 'CompsSpadesB' 'CompsSpadesE'
 elif [ "$current_branch" == "jon" ]; then
   echo "On jon branch, running jon-specific game rename..."
-  ./scripts/rename_game.sh 'CompsSpades'  'CompsSpadesD' 'CompsSpadesC'
+  ./scripts/rename_game.sh 'CompsSpades'  'CompsSpadesD' 'CompsSpades'
 elif [ "$current_branch" == "ugo" ]; then
   echo "On ugo branch, running ugo-specific game rename..."
-  ./scripts/rename_game.sh 'CompsSpades' 'CompsSpadesC' 'CompsSpadesD'
+  ./scripts/rename_game.sh 'CompsSpades' 'CompsSpades' 'CompsSpadesD'
 fi
