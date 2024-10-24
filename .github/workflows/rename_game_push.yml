@@ -45,7 +45,7 @@ jobs:
             echo "PHRASE2='CompsSpadesD'" >> $GITHUB_ENV
             echo "REPLACEMENT_PHRASE='CompsSpadesD'" >> $GITHUB_ENV
           elif [ "${{ github.ref_name }}" == "backend" ]; then
-            echo "PHRASE1='CompsSpadesC'" >> $GITHUB_ENV
+            echo "PHRASE1='CompsSpadesD'" >> $GITHUB_ENV
             echo "PHRASE2='CompsSpadesD'" >> $GITHUB_ENV
             echo "REPLACEMENT_PHRASE='CompsSpadesD'" >> $GITHUB_ENV
           elif [ "${{ github.ref_name }}" == "frontend" ]; then
@@ -63,7 +63,7 @@ jobs:
           elif [ "${{ github.ref_name }}" == "jonathan" ]; then
             echo "PHRASE1='CompsSpadesD'" >> $GITHUB_ENV
             echo "PHRASE2='CompsSpadesD'" >> $GITHUB_ENV
-            echo "REPLACEMENT_PHRASE='CompsSpadesC'" >> $GITHUB_ENV
+            echo "REPLACEMENT_PHRASE='CompsSpadesD'" >> $GITHUB_ENV
           elif [ "${{ github.ref_name }}" == "ugo" ]; then
             echo "PHRASE1='CompsSpadesD'" >> $GITHUB_ENV
             echo "PHRASE2='CompsSpadesD'" >> $GITHUB_ENV
