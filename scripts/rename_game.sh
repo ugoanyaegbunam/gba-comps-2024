@@ -5,8 +5,8 @@ PHRASE_A="$1"
 PHRASE_B="$2"
 PHRASE_C="$3"
 
-# Define the parent directory
-TARGET_DIR="."
+# Define the parent directory from argument
+TARGET_DIR="$4"
 
 # Print the received arguments for debugging
 echo "Replacing all instances of '$PHRASE_A' and '$PHRASE_B' with '$PHRASE_C' starting from the parent directory"
