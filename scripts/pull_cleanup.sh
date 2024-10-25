@@ -6,24 +6,24 @@ echo "Running repository cleanup for '$dev'"
 
 if [ $dev == "ethan" ] 
 then 
-    ./rename_game.sh "CompsSpades" "CompsSpadesE" "CompsSpadesB"
-    ./rename_game.sh "compsspades" "compsspadese" "compsspadesb"
+    ./scripts/rename_game.sh "CompsSpades" "CompsSpadesE" "CompsSpadesB" "."
+    ./scripts/rename_game.sh "compsspades" "compsspadese" "compsspadesb" "."
 fi 
 
 if [ $dev == "leo" ] 
 then 
-    ./rename_game.sh "CompsSpades" "CompsSpadesB" "CompsSpadesE"
-    ./rename_game.sh "compsspades" "compsspadesb" "compsspadese"
+    ./scripts/rename_game.sh "CompsSpades" "CompsSpadesB" "CompsSpadesE" "."
+    ./scripts/rename_game.sh "compsspades" "compsspadesb" "compsspadese" "."
 fi 
 
 if [ $dev == "jonathan" ] 
 then 
-    ./rename_game.sh "CompsSpades" "CompsSpadesD" "CompsSpadesC"
-    ./rename_game.sh "compsspades" "compsspadesd" "compsspadesc"
+    ./scripts/rename_game.sh "CompsSpades" "CompsSpadesD" "CompsSpadesC" "."
+    ./scripts/rename_game.sh "compsspades" "compsspadesd" "compsspadesc" "."
 fi 
 
 if [ $dev == "ugo" ] 
 then 
-    ./rename_game.sh "CompsSpades" "CompsSpadesC" "CompsSpadesD"
-    ./rename_game.sh "compsspades" "compsspadesc" "compsspadesd"
+    ./scripts/rename_game.sh "CompsSpades" "CompsSpadesC" "CompsSpadesD" "."
+    ./scripts/rename_game.sh "compsspades" "compsspadesc" "compsspadesd" "."
 fi 

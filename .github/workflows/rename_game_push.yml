@@ -80,7 +80,7 @@ jobs:
         run: |
           echo "Running rename_game.sh script with original arguments..."
           chmod +x scripts/rename_game.sh
-          ./scripts/rename_game.sh "$PHRASE1" "$PHRASE2" "$REPLACEMENT_PHRASE"
+          ./scripts/rename_game.sh "$PHRASE1" "$PHRASE2" "$REPLACEMENT_PHRASE" ".."
 
       # Check Git Status
       - name: Check Git Status
@@ -107,7 +107,7 @@ jobs:
       - name: Run Rename Script with Lowercase Arguments
         run: |
           echo "Running rename_game.sh script with lowercase arguments..."
-          ./scripts/rename_game.sh "$LOWERCASE_PHRASE1" "$LOWERCASE_PHRASE2" "$LOWERCASE_REPLACEMENT_PHRASE"
+          ./scripts/rename_game.sh "$LOWERCASE_PHRASE1" "$LOWERCASE_PHRASE2" "$LOWERCASE_REPLACEMENT_PHRASE" ".."
 
       # Commit and push changes back to the branch
       - name: Commit and push changes back to the branch
