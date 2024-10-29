@@ -1,0 +1,127 @@
+name: Replace Phrases on Push
+
+on:
+  push:
+    branches:
+      - "*"  # Run on all branches
+
+jobs:
+  replace_phrases:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Enable detailed logging in the workflow for GitHub Actions
+      - name: Enable Step Debugging
+        run: |
+          echo "Enabling GitHub Actions Step Debugging"
+          echo "ACTIONS_STEP_DEBUG=true" >> $GITHUB_ENV
+
+      # Enable script debugging mode (prints each command before execution)
+      - name: Enable Debugging in Script
+        run: |
+          set -x  # Enable shell debug mode
+
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Set up Git with Secrets
+        run: |
+          echo "Configuring Git with secrets..."
+          git config --global user.name "${{ secrets.GH_USERNAME }}"  # Your GitHub username stored as a secret
+          git config --global user.email "${{ secrets.GH_EMAIL }}"    # Your GitHub email stored as a secret
+          git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/${{ github.repository }}.git
+
+      # Set phrase patterns based on the target branch
+      - name: Define Branch-Specific Arguments
+        run: |
+          echo "Determining branch-specific patterns..."
+          echo "Branch being processed: ${GITHUB_REF_NAME}"
+
+          if [ "${{ github.ref_name }}" == "main" ]; then
+            echo "PHRASE1='CompsSpadesB'" >> $GITHUB_ENV
+            echo "PHRASE2='CompsSpadesD'" >> $GITHUB_ENV
+            echo "REPLACEMENT_PHRASE='CompsSpades'" >> $GITHUB_ENV
+          elif [ "${{ github.ref_name }}" == "backend" ]; then
+            echo "PHRASE1='CompsSpadesD'" >> $GITHUB_ENV
+            echo "PHRASE2='CompsSpadesC'" >> $GITHUB_ENV
+            echo "REPLACEMENT_PHRASE='CompsSpades'" >> $GITHUB_ENV
+          elif [ "${{ github.ref_name }}" == "frontend" ]; then
+            echo "PHRASE1='CompsSpadesE'" >> $GITHUB_ENV
+            echo "PHRASE2='CompsSpadesB'" >> $GITHUB_ENV
+            echo "REPLACEMENT_PHRASE='CompsSpades'" >> $GITHUB_ENV
+          elif [ "${{ github.ref_name }}" == "leo" ]; then
+            echo "PHRASE1='CompsSpadesB'" >> $GITHUB_ENV
+            echo "PHRASE2='CompsSpades'" >> $GITHUB_ENV
+            echo "REPLACEMENT_PHRASE='CompsSpadesE'" >> $GITHUB_ENV
+          elif [ "${{ github.ref_name }}" == "ethan" ]; then
+            echo "PHRASE1='CompsSpades'" >> $GITHUB_ENV
+            echo "PHRASE2='CompsSpadesE'" >> $GITHUB_ENV
+            echo "REPLACEMENT_PHRASE='CompsSpadesB'" >> $GITHUB_ENV
+          elif [ "${{ github.ref_name }}" == "jonathan" ]; then
+            echo "PHRASE1='CompsSpades'" >> $GITHUB_ENV
+            echo "PHRASE2='CompsSpadesD'" >> $GITHUB_ENV
+            echo "REPLACEMENT_PHRASE='CompsSpadesC'" >> $GITHUB_ENV
+          elif [ "${{ github.ref_name }}" == "ugo" ]; then
+            echo "PHRASE1='CompsSpadesC'" >> $GITHUB_ENV
+            echo "PHRASE2='CompsSpades'" >> $GITHUB_ENV
+            echo "REPLACEMENT_PHRASE='CompsSpadesD'" >> $GITHUB_ENV
+          fi
+
+          # Print the set variables for debugging
+          echo "PHRASE1: $PHRASE1"
+          echo "PHRASE2: $PHRASE2"
+          echo "REPLACEMENT_PHRASE: $REPLACEMENT_PHRASE"
+
+      # Run the rename_game.sh script with the original arguments
+      - name: Run Rename Script with Original Arguments
+        run: |
+          echo "Running rename_game.sh script with original arguments..."
+          chmod +x scripts/rename_game.sh
+          ./scripts/rename_game.sh "$PHRASE1" "$PHRASE2" "$REPLACEMENT_PHRASE" "."
+
+      # Check Git Status
+      - name: Check Git Status
+        run: |
+          echo "Current Git Status:"
+          git status
+      
+      # Convert the inputs to lowercase
+      - name: Convert Arguments to Lowercase
+        run: |
+          LOWERCASE_PHRASE1=$(echo "$PHRASE1" | tr '[:upper:]' '[:lower:]')
+          LOWERCASE_PHRASE2=$(echo "$PHRASE2" | tr '[:upper:]' '[:lower:]')
+          LOWERCASE_REPLACEMENT_PHRASE=$(echo "$REPLACEMENT_PHRASE" | tr '[:upper:]' '[:lower:]')
+          echo "LOWERCASE_PHRASE1=$LOWERCASE_PHRASE1" >> $GITHUB_ENV
+          echo "LOWERCASE_PHRASE2=$LOWERCASE_PHRASE2" >> $GITHUB_ENV
+          echo "LOWERCASE_REPLACEMENT_PHRASE=$LOWERCASE_REPLACEMENT_PHRASE" >> $GITHUB_ENV
+
+          # Print lowercase values for debugging
+          echo "LOWERCASE_PHRASE1: $LOWERCASE_PHRASE1"
+          echo "LOWERCASE_PHRASE2: $LOWERCASE_PHRASE2"
+          echo "LOWERCASE_REPLACEMENT_PHRASE: $LOWERCASE_REPLACEMENT_PHRASE"
+
+      # Run the rename_game.sh script with the lowercase arguments
+      - name: Run Rename Script with Lowercase Arguments
+        run: |
+          echo "Running rename_game.sh script with lowercase arguments..."
+          ./scripts/rename_game.sh "$LOWERCASE_PHRASE1" "$LOWERCASE_PHRASE2" "$LOWERCASE_REPLACEMENT_PHRASE" "."
+
+      # Commit and push changes back to the branch
+      - name: Commit and push changes back to the branch
+        run: |
+          if [[ `git status --porcelain` ]]; then
+            echo "Changes detected, committing and pushing..."
+            git add .
+            git commit -m "Automated replacement of $PHRASE1 and $PHRASE2 with $REPLACEMENT_PHRASE and their lowercase versions"
+            git push origin ${{ github.head_ref }}  # Push to the original branch
+          else
+            echo "No changes to commit"
+          fi
+
+      # Check for errors after running commands (trap)
+      - name: Add error trapping
+        run: |
+          trap 'echo "An error occurred on line $LINENO"; exit 1' ERR
