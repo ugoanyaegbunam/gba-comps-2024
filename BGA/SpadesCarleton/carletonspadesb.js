@@ -18,7 +18,8 @@
 define([
     "dojo","dojo/_base/declare",
     "ebg/core/gamegui",
-    "ebg/counter"
+    "ebg/counter",
+    "ebg/stock"
 ],
 function (dojo, declare) {
     return declare("bgagame.carletonspadesb", ebg.core.gamegui, {
@@ -47,12 +48,18 @@ function (dojo, declare) {
         setup: function( gamedatas )
         {
             console.log( "Starting game setup" );
+            console.log('spades constructor');
+            this.cardwidth = 72;
+            this.cardheight = 96;
 
             // Example to add a div on the game area
             document.getElementById('game_play_area').insertAdjacentHTML('beforeend', `
                 <div id="player-tables"></div>
+                <div id="myhand_wrap" class="whiteblock">
+                    <b id="myhand_label">${_('My hand')}</b>
+                    <div id="myhand"></div>
+                </div>
             `);
-            
             // Setting up player boards
             Object.values(gamedatas.players).forEach(player => {
                 // TODO: Setting up players boards if needed
@@ -68,7 +75,10 @@ function (dojo, declare) {
             
             // TODO: Set up your game interface here, according to "gamedatas"
             
- 
+            // Player hand
+            this.playerHand = new ebg.stock(); // new stock object for hand
+            this.playerHand.create( this, $('myhand'), this.cardwidth, this.cardheight );
+            
             // Setup game notifications to handle (see "setupNotifications" method below)
             this.setupNotifications();
 
