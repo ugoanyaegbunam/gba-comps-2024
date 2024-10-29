@@ -1,29 +1,37 @@
 #!/bin/bash
 
 # Get the phrases to replace from the arguments
-PHRASE_PATTERN="$1"
-REPLACEMENT_PHRASE="$2"
+PHRASE_A="$1"
+PHRASE_B="$2"
+PHRASE_C="$3"
 
-# Replace the pattern in all files in the repository,
-# excluding the .git, script, and hooks directories.
-# -r flag for recursive, -i for in-place editing, -E for extended regex support
-find . -type f \
-  -not -path "./.git/*" \
-  -not -path "./.github/*" \
-  -not -path "./scripts/*" \
-  -not -path "./hooks/*" \
-  -exec sed -i -E "s/${PHRASE_PATTERN}/${REPLACEMENT_PHRASE}/g" {} +
+# Define the parent directory from argument
+TARGET_DIR="$4"
 
-# Rename files that have the pattern in their filename,
-# excluding the .git, script, and hooks directories.
-for file in $(find . -type f \
-  -name "*${PHRASE_PATTERN}*" \
-  -not -path "./.git/*" \
-  -not -path "./.github/*" \
-  -not -path "./scripts/*" \
-  -not -path "./hooks/*"); do
-  newfile=$(echo "$file" | sed -E "s/${PHRASE_PATTERN}/${REPLACEMENT_PHRASE}/g")
-  mv "$file" "$newfile"
-done 
+# Print the received arguments for debugging
+echo "Replacing all instances of '$PHRASE_A' and '$PHRASE_B' with '$PHRASE_C' starting from the parent directory"
 
-echo "Replaced '${PHRASE_PATTERN}' with '${REPLACEMENT_PHRASE}' in file contents and filenames, ignoring specified directories."
+# Replace in file contents starting from the parent directory, ensuring excluded directories are not processed
+find "$TARGET_DIR" -type f \
+  \( -path "$TARGET_DIR/.git/*" -o -path "$TARGET_DIR/.github/*" -o -path "$TARGET_DIR/scripts/*" -o -path "$TARGET_DIR/hooks/*" \) -prune -o \
+  -type f -exec sh -c '
+    file="$1"
+    echo "Processing file contents: $file"
+    sed -i -E "s/${2}|${3}/${4}/g" "$file"
+  ' sh {} "$PHRASE_A" "$PHRASE_B" "$PHRASE_C" \;
+
+# Rename files and directories starting from the parent directory, ensuring excluded directories are not processed
+find "$TARGET_DIR" -depth -type f \
+  \( -path "$TARGET_DIR/.git/*" -o -path "$TARGET_DIR/.github/*" -o -path "$TARGET_DIR/scripts/*" -o -path "$TARGET_DIR/hooks/*" \) -prune -o \
+  -type f -exec sh -c '
+    file="$1"
+    newfile=$(echo "$file" | sed -E "s/${2}|${3}/${4}/g")
+    # Only rename if the new filename is different
+    if [ "$file" != "$newfile" ]; then
+      mv "$file" "$newfile"
+      echo "Renamed file: $file to $newfile"
+    fi
+  ' sh {} "$PHRASE_A" "$PHRASE_B" "$PHRASE_C" \;
+
+# Final message
+echo "Replaced all instances of '$PHRASE_A' and '$PHRASE_B' with '$PHRASE_C' in both file contents and filenames starting from the parent directory."
