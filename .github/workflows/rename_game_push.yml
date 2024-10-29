@@ -41,33 +41,33 @@ jobs:
           echo "Branch being processed: ${GITHUB_REF_NAME}"
 
           if [ "${{ github.ref_name }}" == "main" ]; then
-            echo "PHRASE1='CompsSpades'" >> $GITHUB_ENV
-            echo "PHRASE2='CompsSpades'" >> $GITHUB_ENV
+            echo "PHRASE1='CompsSpadesB'" >> $GITHUB_ENV
+            echo "PHRASE2='CompsSpadesD'" >> $GITHUB_ENV
             echo "REPLACEMENT_PHRASE='CompsSpades'" >> $GITHUB_ENV
           elif [ "${{ github.ref_name }}" == "backend" ]; then
-            echo "PHRASE1='CompsSpades'" >> $GITHUB_ENV
+            echo "PHRASE1='CompsSpadesD'" >> $GITHUB_ENV
             echo "PHRASE2='CompsSpadesC'" >> $GITHUB_ENV
             echo "REPLACEMENT_PHRASE='CompsSpades'" >> $GITHUB_ENV
           elif [ "${{ github.ref_name }}" == "frontend" ]; then
             echo "PHRASE1='CompsSpadesE'" >> $GITHUB_ENV
-            echo "PHRASE2='CompsSpades'" >> $GITHUB_ENV
+            echo "PHRASE2='CompsSpadesB'" >> $GITHUB_ENV
             echo "REPLACEMENT_PHRASE='CompsSpades'" >> $GITHUB_ENV
           elif [ "${{ github.ref_name }}" == "leo" ]; then
-            echo "PHRASE1='CompsSpades'" >> $GITHUB_ENV
+            echo "PHRASE1='CompsSpadesB'" >> $GITHUB_ENV
             echo "PHRASE2='CompsSpades'" >> $GITHUB_ENV
             echo "REPLACEMENT_PHRASE='CompsSpadesE'" >> $GITHUB_ENV
           elif [ "${{ github.ref_name }}" == "ethan" ]; then
             echo "PHRASE1='CompsSpades'" >> $GITHUB_ENV
             echo "PHRASE2='CompsSpadesE'" >> $GITHUB_ENV
-            echo "REPLACEMENT_PHRASE='CompsSpades'" >> $GITHUB_ENV
+            echo "REPLACEMENT_PHRASE='CompsSpadesB'" >> $GITHUB_ENV
           elif [ "${{ github.ref_name }}" == "jonathan" ]; then
             echo "PHRASE1='CompsSpades'" >> $GITHUB_ENV
-            echo "PHRASE2='CompsSpades'" >> $GITHUB_ENV
+            echo "PHRASE2='CompsSpadesD'" >> $GITHUB_ENV
             echo "REPLACEMENT_PHRASE='CompsSpadesC'" >> $GITHUB_ENV
           elif [ "${{ github.ref_name }}" == "ugo" ]; then
             echo "PHRASE1='CompsSpadesC'" >> $GITHUB_ENV
             echo "PHRASE2='CompsSpades'" >> $GITHUB_ENV
-            echo "REPLACEMENT_PHRASE='CompsSpades'" >> $GITHUB_ENV
+            echo "REPLACEMENT_PHRASE='CompsSpadesD'" >> $GITHUB_ENV
           fi
 
           # Print the set variables for debugging
@@ -80,7 +80,7 @@ jobs:
         run: |
           echo "Running rename_game.sh script with original arguments..."
           chmod +x scripts/rename_game.sh
-          ./scripts/rename_game.sh "$PHRASE1" "$PHRASE2" "$REPLACEMENT_PHRASE" ".."
+          ./scripts/rename_game.sh "$PHRASE1" "$PHRASE2" "$REPLACEMENT_PHRASE" "."
 
       # Check Git Status
       - name: Check Git Status
@@ -107,7 +107,7 @@ jobs:
       - name: Run Rename Script with Lowercase Arguments
         run: |
           echo "Running rename_game.sh script with lowercase arguments..."
-          ./scripts/rename_game.sh "$LOWERCASE_PHRASE1" "$LOWERCASE_PHRASE2" "$LOWERCASE_REPLACEMENT_PHRASE" ".."
+          ./scripts/rename_game.sh "$LOWERCASE_PHRASE1" "$LOWERCASE_PHRASE2" "$LOWERCASE_REPLACEMENT_PHRASE" "."
 
       # Commit and push changes back to the branch
       - name: Commit and push changes back to the branch

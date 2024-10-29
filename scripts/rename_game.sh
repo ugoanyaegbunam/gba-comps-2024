@@ -9,7 +9,7 @@ PHRASE_C="$3"
 TARGET_DIR="$4"
 
 # Print the received arguments for debugging
-echo "Replacing all instances of '$PHRASE_A' and '$PHRASE_B' with '$PHRASE_C' starting from the parent directory"
+echo "Replacing all instances of '$PHRASE_A' and '$PHRASE_B' with '$PHRASE_C' starting from the '$TARGET_DIR' directory"
 
 # Replace in file contents starting from the parent directory, ensuring excluded directories are not processed
 find "$TARGET_DIR" -type f \
