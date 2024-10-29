@@ -3,13 +3,13 @@
 <!-- 
 --------
 -- BGA framework: Gregory Isabelli & Emmanuel Colin & BoardGameArena
--- SpadesCarleton implementation : © <Your name here> <Your email address here>
+-- CompsSpadesC implementation : © <Your name here> <Your email address here>
 -- 
 -- This code has been produced on the BGA studio platform for use on http://boardgamearena.com.
 -- See http://en.boardgamearena.com/#!doc/Studio for more information.
 -------
 
-    spadescarleton_spadescarleton.tpl
+    compsspadesc_compsspadesc.tpl
     
     This is the HTML template of your game.
     

@@ -1,15 +1,15 @@
 /**
  *------
  * BGA framework: Gregory Isabelli & Emmanuel Colin & BoardGameArena
- * SpadesCarleton implementation : © <Your name here> <Your email address here>
+ * CompsSpadesC implementation : © <Your name here> <Your email address here>
  *
  * This code has been produced on the BGA studio platform for use on http://boardgamearena.com.
  * See http://en.boardgamearena.com/#!doc/Studio for more information.
  * -----
  *
- * spadescarleton.js
+ * compsspadesc.js
  *
- * SpadesCarleton user interface script
+ * CompsSpadesC user interface script
  * 
  * In this file, you are describing the logic of your user interface, in Javascript language.
  *
@@ -21,9 +21,9 @@ define([
     "ebg/counter"
 ],
 function (dojo, declare) {
-    return declare("bgagame.spadescarleton", ebg.core.gamegui, {
+    return declare("bgagame.compsspadesc", ebg.core.gamegui, {
         constructor: function(){
-            console.log('spadescarleton constructor');
+            console.log('compsspadesc constructor');
               
             // Here, you can init the global variables of your user interface
             // Example:
@@ -47,14 +47,24 @@ function (dojo, declare) {
         setup: function( gamedatas )
         {
             console.log( "Starting game setup" );
+
+            // Example to add a div on the game area
+            document.getElementById('game_play_area').insertAdjacentHTML('beforeend', `
+                <div id="player-tables"></div>
+            `);
             
             // Setting up player boards
-            for( var player_id in gamedatas.players )
-            {
-                var player = gamedatas.players[player_id];
-                         
+            Object.values(gamedatas.players).forEach(player => {
                 // TODO: Setting up players boards if needed
-            }
+
+                // example of adding a div for each player
+                document.getElementById('player-tables').insertAdjacentHTML('beforeend', `
+                    <div id="player-table-${player.id}">
+                        <strong>${player.name}</strong>
+                        <div>Player zone content goes here</div>
+                    </div>
+                `);
+            });
             
             // TODO: Set up your game interface here, according to "gamedatas"
             
@@ -90,7 +100,7 @@ function (dojo, declare) {
            */
            
            
-            case 'dummmy':
+            case 'dummy':
                 break;
             }
         },
@@ -116,7 +126,7 @@ function (dojo, declare) {
            */
            
            
-            case 'dummmy':
+            case 'dummy':
                 break;
             }               
         }, 
@@ -195,7 +205,7 @@ function (dojo, declare) {
             In this method, you associate each of your game notifications with your local method to handle it.
             
             Note: game notification names correspond to "notifyAllPlayers" and "notifyPlayer" calls in
-                  your spadescarleton.game.php file.
+                  your compsspadesc.game.php file.
         
         */
         setupNotifications: function()
