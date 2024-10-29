@@ -27,3 +27,11 @@ then
     ./scripts/rename_game.sh "CompsSpades" "CompsSpadesC" "CompsSpadesD" "."
     ./scripts/rename_game.sh "compsspades" "compsspadesc" "compsspadesd" "."
 fi 
+
+if [ $dev == "main" ] 
+then 
+    ./scripts/rename_game.sh "CompsSpadesD" "CompsSpadesC" "CompsSpades" "."
+    ./scripts/rename_game.sh "CompsSpadesE" "CompsSpadesB" "CompsSpades" "."
+    ./scripts/rename_game.sh "compsspadesd" "compsspadesc" "compsspades" "."
+    ./scripts/rename_game.sh "compsspadese" "compsspadesb" "compsspades" "."
+fi 
