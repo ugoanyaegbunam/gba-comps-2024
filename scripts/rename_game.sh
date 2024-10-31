@@ -8,8 +8,20 @@ PHRASE_C="$3"
 # Define the parent directory from argument
 TARGET_DIR="$4"
 
+# Get the current working directory
+CURRENT_DIR=$(pwd)
+
+# Logging function
+log() {
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - $1"
+}
+
+# Log the directories
+log "Current directory: $CURRENT_DIR"
+log "Target directory: $TARGET_DIR"
+
 # Print the received arguments for debugging
-echo "Replacing all instances of '$PHRASE_A' and '$PHRASE_B' with '$PHRASE_C' starting from the '$TARGET_DIR' directory"
+log "Replacing all instances of '$PHRASE_A' and '$PHRASE_B' with '$PHRASE_C' starting from the '$TARGET_DIR' directory"
 
 # Replace in file contents starting from the parent directory, ensuring excluded directories are not processed
 find "$TARGET_DIR" -type f \
@@ -34,4 +46,4 @@ find "$TARGET_DIR" -depth -type f \
   ' sh {} "$PHRASE_A" "$PHRASE_B" "$PHRASE_C" \;
 
 # Final message
-echo "Replaced all instances of '$PHRASE_A' and '$PHRASE_B' with '$PHRASE_C' in both file contents and filenames starting from the parent directory."
+log "Replaced all instances of '$PHRASE_A' and '$PHRASE_B' with '$PHRASE_C' in both file contents and filenames starting from the target directory."
