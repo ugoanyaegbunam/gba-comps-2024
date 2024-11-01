@@ -3,13 +3,13 @@
 <!-- 
 --------
 -- BGA framework: Gregory Isabelli & Emmanuel Colin & BoardGameArena
--- CarletonSpadesB implementation : © <Your name here> <Your email address here>
+-- CarletonSpadesE implementation : © <Your name here> <Your email address here>
 -- 
 -- This code has been produced on the BGA studio platform for use on http://boardgamearena.com.
 -- See http://en.boardgamearena.com/#!doc/Studio for more information.
 -------
 
-    carletonspadesb_carletonspadesb.tpl
+    carletonspadese_carletonspadese.tpl
     
     This is the HTML template of your game.
     

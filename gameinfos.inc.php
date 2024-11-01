@@ -10,7 +10,7 @@
 */
 
 $gameinfos = [
-    // Name of the game in English (will serve as the basis for translation)
+    // Name of the game in English (will serve as the basis for translation) 
     'game_name' => "My Great Game",
 
     // Game publisher (use empty string if there is no publisher)

@@ -14,9 +14,9 @@
  *
  * In this PHP file, you are going to defines the rules of the game.
  */
-declare(strict_types=1);
+declare(strict_types=1); 
 
-namespace Bga\Games\CarletonSpadesB;
+namespace Bga\Games\CarletonSpadesE;
 
 require_once(APP_GAMEMODULE_PATH . "module/table/table.game.php");
 
