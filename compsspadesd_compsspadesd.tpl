@@ -24,9 +24,10 @@
     
     Please REMOVE this comment before publishing your game on BGA
 -->
-
-<div id="myhand">
+<div id="myhand_wrap" class="whiteblock">
+    <div id="myhand">
     <div class="playertablecard"></div>
+    </div>
 </div>
 
 <script type="text/javascript">
