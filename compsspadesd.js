@@ -51,6 +51,10 @@ function (dojo, declare) {
             // Example to add a div on the game area
             document.getElementById('game_play_area').insertAdjacentHTML('beforeend', `
                 <div id="player-tables"></div>
+                <div id="myhand_wrap" class="whiteblock">
+                    <b id="myhand_label">${_('My hand')}</b>
+                    <div id="myhand"></div>
+                </div>
             `);
             
             // Setting up player boards
