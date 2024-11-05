@@ -15,6 +15,11 @@
  *
  */
 
+ const DIRECTIONS = {
+    3: ['S', 'W', 'E'],
+    4: ['S', 'W', 'N', 'E'],
+};
+
 define([
     "dojo","dojo/_base/declare",
     "ebg/core/gamegui",
@@ -50,13 +55,10 @@ function (dojo, declare) {
 
             // Example to add a div on the game area
             document.getElementById('game_play_area').insertAdjacentHTML('beforeend', `
-                <div id="player-tables">
-                    <div id="myhand_wrap" class="whiteblock">
-                        <b id="myhand_label">${_('My hand')}</b>
-                        <div id="myhand">
-                                <div class="playertablecard"></div>
-                        </div>
-                    </div>
+                <div id="playertables"></div>
+                <div id="myhand_wrap" class="whiteblock">
+                    <b id="myhand_label">${_('My hand')}</b>
+                    <div id="myhand"></div>
                 </div>
             `);
             
