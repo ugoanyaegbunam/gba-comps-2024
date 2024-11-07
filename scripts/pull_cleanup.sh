@@ -12,8 +12,15 @@ fi
 
 if [ $dev == "leo" ] 
 then 
+<<<<<<< HEAD
     ./scripts/rename_game.sh "CompsSpades" "CompsSpadesB" "CompsSpadesE" "."
     ./scripts/rename_game.sh "compsspades" "compsspadesb" "compsspadese" "."
+=======
+    ./scripts/rename_game.sh "CompsSpadesB" "CompsSpadesB" "CompsSpadesE" "."
+    ./scripts/rename_game.sh "CompsSpades" "CompsSpades" "CompsSpadesE" "."
+    ./scripts/rename_game.sh "compsspadesb" "compsspadesb" "compsspadese" "."
+    ./scripts/rename_game.sh "compsspades" "compsspades" "compsspadese" "."
+>>>>>>> 15af4b3f063aedbb7eb335280922fbf08dd670fe
 fi 
 
 if [ $dev == "jonathan" ] 
