@@ -2,15 +2,15 @@
 /**
  *------
  * BGA framework: Gregory Isabelli & Emmanuel Colin & BoardGameArena
- * CarletonSpadesE implementation : © <Your name here> <Your email address here>
+ * CompsSpadesE implementation : © <Your name here> <Your email address here>
  *
  * This code has been produced on the BGA studio platform for use on https://boardgamearena.com.
  * See http://en.doc.boardgamearena.com/Studio for more information.
  * -----
  *
- * carletonspadese.action.php
+ * compsspadese.action.php
  *
- * CarletonSpadesE main action entry point
+ * CompsSpadesE main action entry point
  *
  *
  * In this file, you are describing all the methods that can be called from your
@@ -23,9 +23,9 @@
 declare(strict_types=1);
 
 /**
- * @property CarletonSpadesE $game
+ * @property CompsSpadesE $game
  */
-class action_carletonspadese extends APP_GameAction
+class action_compsspadese extends APP_GameAction
 {
     /**
      * This is the constructor. Do not try to implement a `__construct` to bypass this method.
@@ -39,7 +39,7 @@ class action_carletonspadese extends APP_GameAction
         }
         else
         {
-            $this->view = "carletonspadese_carletonspadese";
+            $this->view = "compsspadese_compsspadese";
             $this->trace("Complete re-initialization of board game.");
         }
     }

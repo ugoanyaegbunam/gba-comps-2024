@@ -2,7 +2,7 @@
 /**
  *------
  * BGA framework: Gregory Isabelli & Emmanuel Colin & BoardGameArena
- * CarletonSpadesB implementation : © <Your name here> <Your email address here>
+ * CompsSpadesE implementation : © <Your name here> <Your email address here>
  *
  * This code has been produced on the BGA studio platform for use on http://boardgamearena.com.
  * See http://en.boardgamearena.com/#!doc/Studio for more information.
@@ -16,7 +16,7 @@
  */
 declare(strict_types=1); 
 
-namespace Bga\Games\CarletonSpadesE;
+namespace Bga\Games\CompsSpadesE;
 
 require_once(APP_GAMEMODULE_PATH . "module/table/table.game.php");
 
@@ -223,7 +223,7 @@ class Game extends \Table
      */
     protected function getGameName()
     {
-        return "carletonspadesb";
+        return "compsspadese";
     }
 
     /**
@@ -241,7 +241,7 @@ class Game extends \Table
             // Now you can access both $player_id and $player array
             $query_values[] = vsprintf("('%s', '%s', '%s', '%s', '%s')", [
                 $player_id,
-                array_shift($default_colors),
+                array_shift($default_colors), 
                 $player["player_canal"],
                 addslashes($player["player_name"]),
                 addslashes($player["player_avatar"]),
