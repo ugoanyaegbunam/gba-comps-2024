@@ -15,6 +15,10 @@
  *
  */
 
+const DIRECTIONS = {
+    4: ['S', 'W', 'N', 'E'],
+};
+
 define([
     "dojo","dojo/_base/declare",
     "ebg/core/gamegui",
@@ -57,7 +61,7 @@ function (dojo, declare) {
                 <div id="player-tables"></div>
                 <div id="myhand_wrap" class="whiteblock">
                     <b id="myhand_label">${_('My hand')}</b>
-                    <div id="myhand"></div>
+                    <div id="myhand"><div class="playertablecard"></div></div>
                 </div>
             `);
             // Setting up player boards
