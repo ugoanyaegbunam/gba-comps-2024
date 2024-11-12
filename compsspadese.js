@@ -1,15 +1,15 @@
 /**
  *------
  * BGA framework: Gregory Isabelli & Emmanuel Colin & BoardGameArena
- * CompsSpadesD implementation : © <Your name here> <Your email address here>
+ * CompsSpadesE implementation : © <Your name here> <Your email address here>
  *
  * This code has been produced on the BGA studio platform for use on http://boardgamearena.com.
  * See http://en.boardgamearena.com/#!doc/Studio for more information.
  * -----
  *
- * compsspadesd.js
+ * compsspadese.js
  *
- * CompsSpadesD user interface script
+ * CompsSpadesE user interface script
  * 
  * In this file, you are describing the logic of your user interface, in Javascript language.
  *
@@ -26,9 +26,9 @@ define([
     "ebg/counter"
 ],
 function (dojo, declare) {
-    return declare("bgagame.compsspadesd", ebg.core.gamegui, {
+    return declare("bgagame.compsspadese", ebg.core.gamegui, {
         constructor: function(){
-            console.log('compsspadesd constructor');
+            console.log('compsspadese constructor');
               
             // Here, you can init the global variables of your user interface
             // Example:
@@ -217,7 +217,7 @@ function (dojo, declare) {
             In this method, you associate each of your game notifications with your local method to handle it.
             
             Note: game notification names correspond to "notifyAllPlayers" and "notifyPlayer" calls in
-                  your compsspadesd.game.php file.
+                  your compsspadese.game.php file.
         
         */
         setupNotifications: function()
