@@ -54,7 +54,7 @@ $machinestates = [
 
     // The initial state. Please do not modify.
 
-    1 => array( 
+    1 => array(
         "name" => "gameSetup",
         "description" => "",
         "type" => "manager",

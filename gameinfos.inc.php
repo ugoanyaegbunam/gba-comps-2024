@@ -10,20 +10,20 @@
 */
 
 $gameinfos = [
-    // Name of the game in English (will serve as the basis for translation) 
-    'game_name' => "CompsSpadesE",
+    // Name of the game in English (will serve as the basis for translation)
+    'game_name' => "Comps Spades D",
 
     // Game publisher (use empty string if there is no publisher)
-    'publisher' => 'Public Domain',
+    'publisher' => 'Free Domain',
 
     // Url of game publisher website
-    'publisher_website' => 'NA',
+    'publisher_website' => 'N/A',
 
     // Board Game Geek ID of the publisher
-    'publisher_bgg_id' => 171,
+    'publisher_bgg_id' => 0,
 
     // Board game geek ID of the game
-    'bgg_id' => 0,
+    'bgg_id' => 592,
 
     // Players configuration that can be played (ex: 2 to 4 players)
     'players' => [4],
@@ -60,7 +60,7 @@ $gameinfos = [
     // The game end result will display "Winner" for the 1st player and "Loser" for all other players
     'losers_not_ranked' => false,
 
-    // Allow to rank solo games for games where it's the only available mode (ex: Thermopyles). Should be left to false for games where solo mode exists in addition to multiple players mode.
+    // Allow to rank solo games for games where it's the only available mode (ex: Orchard). Should be left to false for games where solo mode exists in addition to multiple players mode.
     'solo_mode_ranked' => false,
 
     // Game is "beta". A game MUST set is_beta=1 when published on BGA for the first time, and must remains like this until all bugs are fixed.

@@ -14,7 +14,7 @@
  *
  * In this PHP file, you are going to defines the rules of the game.
  */
-declare(strict_types=1); 
+declare(strict_types=1);
 
 namespace Bga\Games\CompsSpadesE;
 
@@ -208,7 +208,7 @@ class Game extends \Table
         // Get information about players.
         // NOTE: you can retrieve some extra field you added for "player" table in `dbmodel.sql` if you need it.
         $result["players"] = $this->getCollectionFromDb(
-            "SELECT player_id, player_score score FROM player"
+            "SELECT `player_id` `id`, `player_score` `score` FROM `player`"
         );
 
         // TODO: Gather all information about current game situation (visible by player $current_player_id).
@@ -241,7 +241,7 @@ class Game extends \Table
             // Now you can access both $player_id and $player array
             $query_values[] = vsprintf("('%s', '%s', '%s', '%s', '%s')", [
                 $player_id,
-                array_shift($default_colors), 
+                array_shift($default_colors),
                 $player["player_canal"],
                 addslashes($player["player_name"]),
                 addslashes($player["player_avatar"]),

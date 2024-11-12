@@ -2,14 +2,14 @@
 
 <!-- 
 --------
--- BGA framework: Gregory Isabelli & Emmanuel Colin & BoardGameArena
--- CompsSpadesE implementation : © <Your name here> <Your email address here>
+-- BGA framework: © Gregory Isabelli <gisabelli@boardgamearena.com> & Emmanuel Colin <ecolin@boardgamearena.com>
+-- template implementation : © <Your name here> <Your email address here>
 -- 
 -- This code has been produced on the BGA studio platform for use on http://boardgamearena.com.
 -- See http://en.boardgamearena.com/#!doc/Studio for more information.
 -------
 
-    compsspadese_compsspadese.tpl
+    heartsla_heartsla.tpl
     
     This is the HTML template of your game.
     
@@ -45,12 +45,6 @@ ${
 <script type="text/javascript">
 
 // Javascript HTML templates
-
-/*
-// Example:
-var jstpl_some_game_item='<div class="my_game_item" id="my_game_item_${MY_ITEM_ID}"></div>';
-
-*/
 
 </script>  
 

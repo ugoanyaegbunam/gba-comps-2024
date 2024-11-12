@@ -1,4 +1,4 @@
-This file contains text that should look different on each branch. On the main, backend, and frontend branch it will be compsspadesd and CompsSpadesD.
+This file contains text that should look different on each branch. On the main, backend, and frontend branch it will be compsspadese and CompsSpadesE.
 
 When pushed to ugo branch there should be a D added to it
 
