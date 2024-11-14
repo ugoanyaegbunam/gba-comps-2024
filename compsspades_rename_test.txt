@@ -1,9 +1,0 @@
-This file contains text that should look different on each branch. On the main, backend, and frontend branch it will be compsspades and CompsSpades.
-
-When pushed to ugo branch there should be a D added to it
-
-When pushed to leo branch there should be an E added to it
-
-When pushed to ethan branch there should be a B added to it
-
-When pushed to jonathan branch there should be a C added to it
