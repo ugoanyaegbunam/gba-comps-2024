@@ -74,9 +74,6 @@ function (dojo, declare) {
                 `);
             });
 
-            Object.values(gamedatas.players).map((player,index) => ''
-        
-        )
             
             // TODO: Set up your game interface here, according to "gamedatas"
             
